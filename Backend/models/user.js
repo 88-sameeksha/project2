@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+//const Module=require('node:module');
 
 const userschema =new mongoose.Schema({
     fullname: {type:String,
@@ -10,8 +11,7 @@ const userschema =new mongoose.Schema({
     },           
 },
 {timestamps:true},
+);
+module.exports=mongoose.model('user',userschema );
 
-module.exports=mongoose.model('user',userschema )
 
-
-)
