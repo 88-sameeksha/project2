@@ -1,7 +1,9 @@
 const express =require("express");
 const router =express.Router();
+const user=require("../models/user");
+const mongoose = require('mongoose');
 
-router.post('/register',async()=>{
+router.post('/register',async(req,res)=>{
     try{
         const{fullname,email,password}=req.body;
         if(!fullname||!email|| !password){

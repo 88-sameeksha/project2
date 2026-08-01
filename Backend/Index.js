@@ -1,10 +1,9 @@
 //step 1
-const express=require("express");
-const app=express();
-//step 2 set dot env
 const dotenv=require("dotenv");
 dotenv.config();
-const port=process.env.PORT;
+const express=require("express");
+const app=express();
+const cors=require("cors");
 const cookie=require("cookie-parser");
 
 //database calll
@@ -19,9 +18,16 @@ const userRoutes =require("./routes/userroutes");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookie());
+app.use(cors());
 //api
 app.use("/api/user",userRoutes);
 
-app.listen(port,()=>{
+app.get("/clone",async(req,res)=>{
+    res.send("Your Netflix clone welcoming you!!");
+});
+
+
+const port=process.env.PORT;
+app.listen(port,'0.0.0.0',()=>{
     console.log(`server i listening at port ${port}`);
 });
