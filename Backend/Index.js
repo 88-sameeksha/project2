@@ -22,6 +22,7 @@ app.use(cors());
 //api
 app.use("/api/user",userRoutes);
 
+
 app.get("/clone",async(req,res)=>{
     res.send("Your Netflix clone welcoming you!!");
 });
@@ -29,5 +30,5 @@ app.get("/clone",async(req,res)=>{
 
 const port=process.env.PORT;
 app.listen(port,'0.0.0.0',()=>{
-    console.log(`server i listening at port ${port}`);
+    console.log(`server is listening at port ${port}`);
 });
