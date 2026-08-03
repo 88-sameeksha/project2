@@ -58,7 +58,7 @@ router.post('/login',async(req,res)=>{
 });
 
 //loggout
-router.post('/logout',async(req,res)=>{
+router.get('/logout',async(req,res)=>{
     return status(200).cookie("token","" ,{expiresIn:new Date(Date.now(),{httponly:true})}).json({message:"User logged Out successfully",success:true});
 })
 

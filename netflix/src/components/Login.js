@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import { useState } from 'react'
+import axios from 'axios'
 const Login = () => {
   const [islogin,setIslogin]=useState(false);
   const [fullname,setFullname]=useState("");
@@ -10,10 +11,27 @@ const Login = () => {
   const loginhandler=()=>{
     setIslogin(!islogin);
   }
-  const handledata=(e)=>{
+  const handledata=async(e)=>{
     e.preventDefault();
-    console.log(fullname,email,password);
+    if(islogin){
+      //llogin 
+      try{
+
+       const res=await axios.post("http://localhost:5600/api/user/login",{email,password});
+        console.log(res);
+      }catch(error){
+        console.log(error);
+      }
+    }else{
+   try{
+        const res=await axios.post("http://localhost:5600/api/user/register",{fullname,email,password});
+        console.log(res);
+   }catch(error){
+    console.log(error);
+   }
   }
+
+}
   return (
     <div>
       <Header/>

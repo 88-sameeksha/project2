@@ -1,0 +1,1 @@
+const API_END_POINT=require("http://localhost:5600/api/user");
