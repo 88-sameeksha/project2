@@ -2,7 +2,10 @@ import React from 'react'
 import Header from './Header'
 import { useState } from 'react'
 import axios from 'axios'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 const Login = () => {
+  const navigate=useNavigate();
   const [islogin,setIslogin]=useState(false);
   const [fullname,setFullname]=useState("");
    const [email,setEmail]=useState("");
@@ -18,15 +21,31 @@ const Login = () => {
       try{
 
        const res=await axios.post("http://localhost:5600/api/user/login",{email,password});
-        console.log(res);
-      }catch(error){
-        console.log(error);
+        
+        if(res.data.success){
+          toast.success(res.data.message);
+          navigate("/browse")
+        }
+      }catch (error) {
+    // Check if the server returned a response with an error message
+    const errorMessage = error.response?.data?.message || error.message || "Something went wrong";
+    
+    toast.error(errorMessage);
+    console.log(error);
       }
     }else{
    try{
         const res=await axios.post("http://localhost:5600/api/user/register",{fullname,email,password});
-        console.log(res);
-   }catch(error){
+        
+        if(res.data.success){
+          toast.success(res.data.message);
+        }
+        setIslogin(true);
+   }catch (error) {
+    // Check if the server returned a response with an error message
+    const errorMessage = error.response?.data?.message || error.message || "Something went wrong";
+    
+    toast.error(errorMessage);
     console.log(error);
    }
   }
