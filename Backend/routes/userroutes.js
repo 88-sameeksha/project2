@@ -13,7 +13,7 @@ router.post('/register',async(req,res)=>{
         }
        const User=await user.findOne({email});
        if(User){
-        return res.status(404).json({message:"This Email is already used",sucess:false,})
+        return res.status(404).json({message:"This Email is already used",success:false,})
        }
        //hashpassword
        const hashedpassword=await bcryptjs.hash(password,16);
