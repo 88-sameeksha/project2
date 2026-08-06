@@ -4,8 +4,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import setUser  from '../redux/userslice'
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/userslice'
 
 
 
@@ -24,14 +24,15 @@ const Login = () => {
     e.preventDefault();
     if(islogin){
       //llogin 
+      const user={email,password};
       try{
 
-       const res=await axios.post("http://localhost:5600/api/user/login",{email,password});
+       const res=await axios.post("http://localhost:5600/api/user/login",user);
         
         if(res.data.success){
           toast.success(res.data.message);
           dispatch(setUser(res.data.user));
-          navigate("/browse")
+          navigate("/browse");
         }
       }catch (error) {
     // Check if the server returned a response with an error message
@@ -40,9 +41,9 @@ const Login = () => {
     toast.error(errorMessage);
     console.log(error);
       }
-    }else{
+    }else{ const user ={fullname,email,password};
    try{
-        const res=await axios.post("http://localhost:5600/api/user/register",{fullname,email,password});
+        const res=await axios.post("http://localhost:5600/api/user/register",user);
         
         if(res.data.success){
           toast.success(res.data.message);
