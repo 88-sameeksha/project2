@@ -18,7 +18,12 @@ const userRoutes =require("./routes/userroutes");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookie());
-app.use(cors());
+const corsOptions={
+    origin:'http://localhost:3000',
+    credentials:true,
+    successStatus:200,
+}
+app.use(cors(corsOptions));
 //api
 app.use("/api/user",userRoutes);
 

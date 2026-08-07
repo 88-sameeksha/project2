@@ -27,8 +27,13 @@ const Login = () => {
       const user={email,password};
       try{
 
-       const res=await axios.post("http://localhost:5600/api/user/login",user);
-        
+       const res=await axios.post("http://localhost:5600/api/user/login",user,{
+        headers:{
+          "Content-Type":"application/json"
+        },
+        withCredentials:true
+       });
+       
         if(res.data.success){
           toast.success(res.data.message);
           dispatch(setUser(res.data.user));
@@ -43,7 +48,13 @@ const Login = () => {
       }
     }else{ const user ={fullname,email,password};
    try{
-        const res=await axios.post("http://localhost:5600/api/user/register",user);
+        const res=await axios.post("http://localhost:5600/api/user/register",user,{
+           headers:{
+          "Content-Type":"application/json"
+        },
+        withCredentials:true
+       }
+        );
         
         if(res.data.success){
           toast.success(res.data.message);
